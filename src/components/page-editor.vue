@@ -53,7 +53,9 @@
       <a-tabs default-active-key="1">
         <a-tab-pane key="1" tab="组件">
           <a-card title="基本属性" v-if="selected">
-            <base-editor :element="selected"></base-editor>
+            <base-editor :value="selected"></base-editor>
+
+            <json-editor></json-editor>
           </a-card>
         </a-tab-pane>
         <a-tab-pane key="2" tab="页面" force-render>Content of Tab Pane 2</a-tab-pane>
@@ -106,6 +108,9 @@ export default {
       }
       return this.page.elements[this.container.selectedIndex];
     },
+    scale(){
+      return this.container.scale || 1;
+    }
   },
   provide: function () {
     return {
@@ -129,7 +134,6 @@ export default {
       });
     },
     handleSelect(element,index) {
-      console.log(element);
       this.container.selectedIndex = index;
     },
   },
@@ -138,8 +142,8 @@ export default {
 <style scoped>
 ::-webkit-scrollbar {
   /*滚动条整体样式*/
-  width: 4px; /*高宽分别对应横竖滚动条的尺寸*/
-  height: 4px;
+  width: 8px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 8px;
 }
 ::-webkit-scrollbar-thumb {
   /*滚动条里面小方块*/

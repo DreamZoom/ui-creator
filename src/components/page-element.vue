@@ -11,13 +11,16 @@
     :y="property.top"
     :w="property.width"
     :h="property.height"
+    :parentScaleX="editor.scale"
+    :parentScaleY="editor.scale"
   >
-    <div>hello</div>
+    <component :is="element"></component>
   </VueDragResize>
 </template>
 
 <script>
 import VueDragResize from "vue-drag-resize";
+import elements from "./elements/index";
 export default {
   name: "PageElement",
   props: {
@@ -62,6 +65,10 @@ export default {
         height,
       };
     },
+    element(){
+      const {type }= this.value;
+      return elements.factory(type) || {};
+    }
   },
   methods: {
     handleClick(evt) {
